@@ -5,21 +5,20 @@ pub mod config;
 pub mod work;
 
 pub struct Tracker<'a> {
-    config: config::Config,
     workers: Vec<work::Worker<'a>>,
 }
 
 impl<'a> Tracker<'a> {
-    pub fn new(config: config::Config) -> Tracker<'a> {
-        let workers = vec![];
-        Tracker { config, workers }
+    pub fn new(config: &'a config::Config) -> Tracker<'a> {
+        let mut workers = vec![];
+        for track in &config.tracks {
+            let w = work::Worker::new(config, track);
+            workers.push(w);
+        }
+        Tracker { workers }
     }
     pub fn run(&'a mut self) {
-        for track in &self.config.tracks {
-            let w = work::Worker::new(&self.config, track);
-            self.workers.push(w);
-        }
-        // XXX Single worker only now.
+        // XXX Single worker only for now.
         self.workers[0].run();
     }
 }
