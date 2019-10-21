@@ -5,7 +5,7 @@ use twitter_stream::rt::{self, Future, Stream};
 use twitter_stream::{Token, TwitterStreamBuilder};
 
 fn main() {
-    let c = parse_config();
+    let c = Config::new();
     let future = TwitterStreamBuilder::filter(&c.token)
         .track(Some("twitter"))
         .listen()
@@ -23,12 +23,14 @@ struct Config {
     token: Token,
 }
 
-fn parse_config() -> Config {
-    use std::env;
-    let ckey = env::var("TRACK_CONSUMER_KEY").unwrap();
-    let csecret = env::var("TRACK_CONSUMER_SECRET").unwrap();
-    let atoken = env::var("TRACK_ACCESS_TOKEN").unwrap();
-    let asecret = env::var("TRACK_ACCESS_SECRET").unwrap();
-    let token = Token::new(ckey, csecret, atoken, asecret);
-    Config { token }
+impl Config {
+    fn new() -> Config {
+        use std::env;
+        let ckey = env::var("TRACK_CONSUMER_KEY").unwrap();
+        let csecret = env::var("TRACK_CONSUMER_SECRET").unwrap();
+        let atoken = env::var("TRACK_ACCESS_TOKEN").unwrap();
+        let asecret = env::var("TRACK_ACCESS_SECRET").unwrap();
+        let token = Token::new(ckey, csecret, atoken, asecret);
+        Config { token }
+    }
 }
