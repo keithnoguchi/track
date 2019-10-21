@@ -13,7 +13,18 @@ impl Config {
         let atoken = env::var("TRACK_ACCESS_TOKEN").unwrap();
         let asecret = env::var("TRACK_ACCESS_SECRET").unwrap();
         let token = Token::new(ckey, csecret, atoken, asecret);
-        let tracks = vec!["twitter"];
+        let tracks = vec![
+            "twitter",
+            "facebook",
+            "google",
+            "travel",
+            "art",
+            "music",
+            "photography",
+            "love",
+            "fashion",
+            "food",
+        ];
         Config { token, tracks }
     }
 }
