@@ -2,3 +2,6 @@
 pub mod config;
 pub mod track;
 pub mod work;
+
+pub use crate::config::Config;
+pub use crate::track::Tracker;
