@@ -3,6 +3,6 @@ extern crate track;
 
 fn main() {
     let c = track::config::Config::new();
-    let tracker = track::Tracker::new(c);
+    let mut tracker = track::Tracker::new(c);
     tracker.run();
 }

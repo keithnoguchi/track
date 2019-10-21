@@ -4,17 +4,22 @@ extern crate twitter_stream;
 pub mod config;
 pub mod work;
 
-pub struct Tracker {
+pub struct Tracker<'a> {
     config: config::Config,
+    workers: Vec<work::Worker<'a>>,
 }
 
-impl Tracker {
-    pub fn new(config: config::Config) -> Tracker {
-        Tracker { config }
+impl<'a> Tracker<'a> {
+    pub fn new(config: config::Config) -> Tracker<'a> {
+        let workers = vec![];
+        Tracker { config, workers }
     }
-    pub fn run(&self) {
+    pub fn run(&'a mut self) {
         for track in &self.config.tracks {
-            work::Worker::new(&self.config, track).run();
+            let w = work::Worker::new(&self.config, track);
+            self.workers.push(w);
         }
+        // XXX Single worker only now.
+        self.workers[0].run();
     }
 }
