@@ -1,0 +1,46 @@
+---
+version: 2
+defaults: &defaults
+  working_directory: /home/circleci/track
+  machine:
+    image: ubuntu-1604:201903-01
+workflows:
+  version: 2
+  test_on_multiple_targets:
+    jobs:
+      - checkout
+      - format:
+          requires:
+            - checkout
+      - test-arch64:
+          requires:
+            - format
+      - test-ubuntu64:
+          requires:
+            - format
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root:  .
+          paths: .
+  format:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run: make fmt-arch64
+  test-arch64:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run: make test-arch64
+  test-ubuntu64:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run: make test-ubuntu64
