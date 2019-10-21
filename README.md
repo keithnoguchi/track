@@ -9,7 +9,7 @@ Twitter realtime trend tracker in [Rust].
 
 ## Environment variables
 
-track uses [Twitter stream API] to track the realtime twitter trend.
+track uses [Twitter stream APIs] to track the realtime twitter trend.
 To do that, you need the consumer and access keys set through the
 environment variable.  You can request yours through [Twitter developer site]:
 
@@ -21,7 +21,7 @@ $ export TRACK_ACCESS_TOKEN=your_access_token
 $ export TRACK_ACCESS_SECRET=your_access_token_secret
 ```
 
-[Twitter APIs]: https://developer.twitter.com/en/docs/tweets/filter-realtime/api-reference/post-statuses-filter
+[Twitter stream APIs]: https://developer.twitter.com/en/docs/tweets/filter-realtime/api-reference/post-statuses-filter
 [Twitter developer site]: https://developer.twitter.com/
 
 ## Run
