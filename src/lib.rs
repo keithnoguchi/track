@@ -17,3 +17,27 @@ impl Config {
         Config { token }
     }
 }
+
+pub struct Tracker {
+    config: Config,
+}
+
+impl Tracker {
+    pub fn new(config: Config) -> Tracker {
+        Tracker { config }
+    }
+    pub fn run(&self) {
+        use twitter_stream::rt::{self, Future, Stream};
+        use twitter_stream::TwitterStreamBuilder;
+        let future = TwitterStreamBuilder::filter(&self.config.token)
+            .track(Some("twitter"))
+            .listen()
+            .flatten_stream()
+            .for_each(|json| {
+                println!("{}", json);
+                Ok(())
+            })
+            .map_err(|e| println!("error: {}", e));
+        rt::run(future);
+    }
+}
