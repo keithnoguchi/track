@@ -2,6 +2,6 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y make rustc cargo
 # For OpenSSL for Rust
-RUN apt-get update && apt-get install -y libssl-dev autoconf
+RUN apt-get update && apt-get install -y libssl-dev pkg-config
 WORKDIR /home/build
 CMD ["make"]
