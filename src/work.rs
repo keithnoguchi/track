@@ -1,14 +1,22 @@
 // SPDX-License-Identifier: GPL-2.0
 extern crate twitter_stream;
 
+use std::thread;
+
 pub struct Worker<'a> {
     config: &'a super::Config,
     track: &'a str,
+    _thread: thread::JoinHandle<()>,
 }
 
 impl<'a> Worker<'a> {
     pub fn new(config: &'a super::Config, track: &'a str) -> Worker<'a> {
-        Worker { config, track }
+        let _thread = thread::spawn(|| {});
+        Worker {
+            config,
+            track,
+            _thread,
+        }
     }
     pub fn run(&self) {
         use twitter_stream::rt::{self, Future, Stream};
