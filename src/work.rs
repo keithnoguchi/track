@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
+extern crate twitter_stream;
+
 use super::config;
 
 pub struct Worker<'a> {
