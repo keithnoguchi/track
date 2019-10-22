@@ -9,8 +9,8 @@ use twitter_stream::rt::{self, Future, Stream};
 use twitter_stream::TwitterStreamBuilder;
 
 pub struct Worker {
+    pub track: String,
     token: twitter_stream::Token,
-    track: String,
     sender: Arc<Mutex<mpsc::Sender<Event>>>,
     thread: Option<thread::JoinHandle<()>>,
 }
