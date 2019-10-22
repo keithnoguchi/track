@@ -64,7 +64,7 @@ impl Tracker {
                     pb.finish();
                     continue;
                 }
-                pb.set_message(&format!("{} trends:", e));
+                pb.set_message(&format!("{} trend:", e));
                 pb.inc(1);
             }
         });
