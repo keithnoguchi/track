@@ -1,66 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0
-use super::work::Worker;
+use super::{work::Worker, Event};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
-use std::fmt;
-use std::str;
 use std::sync::{mpsc, Arc, Mutex};
 use std::time::Duration;
 
-#[derive(Clone, Copy)]
-pub enum Track {
-    Twitter,
-    Facebook,
-    Google,
-    Travel,
-    Art,
-    Music,
-    Photography,
-    Love,
-    Fashion,
-    Food,
-    Other,
-}
-
-impl fmt::Display for Track {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Track::Twitter => write!(f, "T"),
-            Track::Facebook => write!(f, "F"),
-            Track::Google => write!(f, "G"),
-            Track::Travel => write!(f, "Tr"),
-            Track::Art => write!(f, "Ar"),
-            Track::Music => write!(f, "Mu"),
-            Track::Photography => write!(f, "Ph"),
-            Track::Love => write!(f, "Lo"),
-            Track::Fashion => write!(f, "Fa"),
-            Track::Food => write!(f, "Fo"),
-            _ => write!(f, "."),
-        }
-    }
-}
-
-impl str::FromStr for Track {
-    type Err = ();
-    fn from_str(s: &str) -> Result<Track, ()> {
-        match s {
-            "twitter" => Ok(Track::Twitter),
-            "facebook" => Ok(Track::Facebook),
-            "google" => Ok(Track::Google),
-            "travel" => Ok(Track::Travel),
-            "art" => Ok(Track::Art),
-            "music" => Ok(Track::Music),
-            "photography" => Ok(Track::Photography),
-            "love" => Ok(Track::Love),
-            "fashion" => Ok(Track::Fashion),
-            "food" => Ok(Track::Food),
-            _ => Ok(Track::Other),
-        }
-    }
-}
-
 pub struct Tracker {
-    workers: Vec<super::work::Worker>,
-    receiver: mpsc::Receiver<Track>,
+    workers: Vec<Worker>,
+    receiver: mpsc::Receiver<Event>,
     delay_in_msec: u64,
     _chart: MultiProgress,
     _bars: Vec<ProgressBar>,
@@ -92,7 +38,6 @@ impl Tracker {
         }
     }
     pub fn run(&mut self) {
-        let sty = ProgressStyle::default_bar();
         let mut delay = 0;
         for w in &mut self.workers {
             w.run(Duration::from_millis(delay));

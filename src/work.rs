@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 extern crate twitter_stream;
 
-use super::Track;
+use super::Event;
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::Duration;
@@ -11,12 +11,12 @@ use twitter_stream::TwitterStreamBuilder;
 pub struct Worker {
     token: twitter_stream::Token,
     track: String,
-    sender: Arc<Mutex<mpsc::Sender<Track>>>,
+    sender: Arc<Mutex<mpsc::Sender<Event>>>,
     thread: Option<thread::JoinHandle<()>>,
 }
 
 impl Worker {
-    pub fn new(c: &super::Config, track: &str, sender: Arc<Mutex<mpsc::Sender<Track>>>) -> Worker {
+    pub fn new(c: &super::Config, track: &str, sender: Arc<Mutex<mpsc::Sender<Event>>>) -> Worker {
         let token = twitter_stream::Token::new(
             c.consumer_key.clone(),
             c.consumer_sec.clone(),
@@ -32,7 +32,7 @@ impl Worker {
         }
     }
     pub fn run(&mut self, delay: Duration) {
-        let msg = self.track.parse::<super::Track>().unwrap();
+        let msg = self.track.parse::<Event>().unwrap();
         let token = self.token.clone();
         let track = self.track.clone();
         let sender = Arc::clone(&self.sender);
