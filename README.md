@@ -2,10 +2,14 @@
 
 [![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
-Twitter realtime trend tracker in [Rust].
+Realtime [Twitter] trend tracker in [Rust].
 
+[![AsciiCast]](https://asciinema.org/a/276420)
+
+[Twitter]: https://twitter.com
 [Rust]: https://www.rust-lang.org
 [CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
+[AsciiCast]: https://asciinema.org/a/276420.svg
 
 ## Pre-requisite
 
