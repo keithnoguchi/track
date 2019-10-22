@@ -12,6 +12,13 @@ pub enum Track {
     Twitter,
     Facebook,
     Google,
+    Travel,
+    Art,
+    Music,
+    Photography,
+    Love,
+    Fashion,
+    Food,
     Other,
 }
 
@@ -21,6 +28,13 @@ impl fmt::Display for Track {
             Track::Twitter => write!(f, "T"),
             Track::Facebook => write!(f, "F"),
             Track::Google => write!(f, "G"),
+            Track::Travel => write!(f, "Tr"),
+            Track::Art => write!(f, "Ar"),
+            Track::Music => write!(f, "Mu"),
+            Track::Photography => write!(f, "Ph"),
+            Track::Love => write!(f, "Lo"),
+            Track::Fashion => write!(f, "Fa"),
+            Track::Food => write!(f, "Fo"),
             _ => write!(f, "."),
         }
     }
@@ -33,6 +47,13 @@ impl str::FromStr for Track {
             "twitter" => Ok(Track::Twitter),
             "facebook" => Ok(Track::Facebook),
             "google" => Ok(Track::Google),
+            "travel" => Ok(Track::Travel),
+            "art" => Ok(Track::Art),
+            "music" => Ok(Track::Music),
+            "photography" => Ok(Track::Photography),
+            "love" => Ok(Track::Love),
+            "fashion" => Ok(Track::Fashion),
+            "food" => Ok(Track::Food),
             _ => Ok(Track::Other),
         }
     }
@@ -62,7 +83,7 @@ impl Tracker {
     pub fn run(&mut self) {
         let mut delay = 0;
         for w in &mut self.workers {
-            (*w).run(time::Duration::from_secs(delay));
+            w.run(time::Duration::from_secs(delay));
             delay += self.delay_in_sec;
         }
         loop {

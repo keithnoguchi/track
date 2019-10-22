@@ -9,7 +9,7 @@ Twitter realtime trend tracker in [Rust].
 
 ## Pre-requisite
 
-Thanks to [Rust] clean design, there is not much you need to make `track`
+Thanks to [Rust]'s clean design, there is not much you need to make `track`
 up and running, as in those two docker files, for [ArchLinux] and [Ubuntu18.04],
 respectively.  Just install the standard [Rust] packages and you're good
 to go.
@@ -36,19 +36,21 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 
 ## Run
 
-`make run` execute the `carge run` which dumps the realtime trend of multiple tracks.
+`make run` execute the `carge run`, which dumps the realtime trend of multiple tracks.
 
 ```sh
 $ make run
-    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
      Running `target/debug/track`
-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-TTTTTTTTTTTTTFFFFFFFFTFTTFTFTTTTTTTTTTTTTTTTTTFTTTTTTTTTTTFTTFTTTTTTTTTTTTFTTTTFFFFFFerror: 420 <unknown status code>
-^C
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTFFF
+FFTTTTTTFTTTTTTTTTTTTTTTTTTTTTFTTTTTTTTTTTTTTTTTTTTTTTTFFFFFFFFFFFFTTTTTTTTTTTTTTTTTTTTTTTTTFTTTTTTTTFTT
+TTTTTTTTTTTTTTTTFFFFFFFFFFFFFFFFFFFFTTTTTTTTTTTTTTTTTTTFTTFTTTTTTTTFTTTTTTTFTFTTTTTTTTTTTTTTFFFFFFFFFFFF
+FFFFFFFFTFTTTTTTTTTTTTTTFFTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT^C
 ```
 
-Currently, `track` only tracks two trends, Twitter and Facebook, as in [config.rs].
-It might be due to the rate limit but I'll find that out soon.
+Currently, `track` only tracks two trends, Twitter and Facebook, as in [config.rs],
+due to the [420 HTTP error].  Here is the `netstat` output and it only allows
+two concurrent TCP sessions.
 
 ```sh
 $ netstat -cntp
@@ -60,6 +62,9 @@ tcp        0      0 192.168.255.198:36486   199.59.150.42:443       ESTABLISHED 
 tcp        0      0 192.168.255.198:36488   199.59.150.42:443       ESTABLISHED 6962/target/debug/t
 ^C
 ```
+
+[config.rs]: src/config.rs
+[420 HTTP error]: https://developer.twitter.com/en/docs/basics/response-codes
 
 ## Test
 
