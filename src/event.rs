@@ -2,7 +2,7 @@
 use std::fmt;
 use std::str;
 
-#[derive(Clone, Copy)]
+#[derive(Hash, Clone, Copy, Debug)]
 pub enum Event {
     Twitter,
     Facebook,
@@ -16,6 +16,13 @@ pub enum Event {
     Food,
     Other,
 }
+
+impl PartialEq for Event {
+    fn eq(&self, other: &Event) -> bool {
+        self == other
+    }
+}
+impl Eq for Event {}
 
 impl fmt::Display for Event {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
