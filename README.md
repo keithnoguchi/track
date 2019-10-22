@@ -11,6 +11,45 @@ Realtime [Twitter] trend tracker in [Rust].
 [CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
 [AsciiCast]: https://asciinema.org/a/276420.svg
 
+## Design
+
+Here is the high level design diagram of the `track`.  It's based
+on the standard worker pattern, which runs multiple `track::Workers`
+to retrieve the specific trend through [twitter-stream] [Rust]
+crate and send it through the `std::sync::mpsc` channel to report
+it back to the `track::Tracker` aggregater.  `track::Tracker`
+creates a dedicate `std::thread` to report the live update through
+[indicatif] [Rust] crate.  Since the communication between
+`track::Tracker` and `track::Worker` is over `std::sync::mpsc` channel,
+it can easily add more workers to support multiple tracks.
+
+But due to the [Twitter stream API] rate limitting, you can't have
+more than two TCP sessions from the same IP.  To overcome this
+challenge, we'll move to the distributed design by running those
+workers on a differnt machines.
+
+```
++---------------------------------------------------------------+
+|                         indicatif crate                       |
++---------------------------------------------------------------+
++---------------------------------------------------------------+
+|                          track::Tracker                       |
++---------------------------------------------------------------+
+                                ^
+                                |
+                 +------------------------------+
+                 |    std::sync::mpsc channel   |
+                 +------------------------------+
+                     ^                       ^
+                     |                       |
++--------------------+---------+ +-----------+------------------+
+| Twitter track track::Worker  | | Facebook track track::Worker |
++------------------------------+ +------------------------------+
++---------------------------------------------------------------+
+|                     twitter-stream crate                      |
++---------------------------------------------------------------+
+```
+
 ## Pre-requisite
 
 Thanks to [Rust]'s clean design, there is not much you need to make `track`
