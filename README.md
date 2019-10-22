@@ -144,13 +144,13 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 ## To-do
 
-Here is the list of to-do:
+Here is the list of to-dos:
 
 - [ ] Support more than two tracks
 - [ ] More unit tests
 - [ ] Documentation
-- [ ] Better ownership
-- [ ] Better summary
+- [ ] Better ownership handling with Drop trait support
+- [ ] Better summary output
 
 ## Special Thanks
 
