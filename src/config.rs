@@ -6,6 +6,7 @@ pub struct Config {
     pub consumer_sec: String,
     pub access_tkn: String,
     pub access_sec: String,
+    pub delay_in_sec: u64,
     pub tracks: Vec<&'static str>,
 }
 
@@ -15,6 +16,7 @@ impl Config {
         let consumer_sec = env::var("TRACK_CONSUMER_SECRET").unwrap_or("dummy".to_string());
         let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or("dummy".to_string());
         let access_sec = env::var("TRACK_ACCESS_SECRET").unwrap_or("dummy".to_string());
+        let delay_in_sec = 30;
         let tracks = vec![
             "twitter",
             "facebook",
@@ -32,6 +34,7 @@ impl Config {
             consumer_sec,
             access_tkn,
             access_sec,
+            delay_in_sec,
             tracks,
         }
     }
@@ -55,5 +58,10 @@ mod tests {
         ];
         let config = super::Config::new();
         assert_eq!(want, config.tracks);
+    }
+    #[test]
+    fn delay_in_sec() {
+        let config = super::Config::new();
+        assert_eq!(30, config.delay_in_sec);
     }
 }
