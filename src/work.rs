@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
 extern crate twitter_stream;
 
+use std::thread;
+
 pub struct Worker {
     token: twitter_stream::Token,
     track: String,
@@ -20,16 +22,21 @@ impl Worker {
     pub fn run(&self) {
         use twitter_stream::rt::{self, Future, Stream};
         use twitter_stream::TwitterStreamBuilder;
-        let track = &self.track[..];
-        let future = TwitterStreamBuilder::filter(&self.token)
-            .track(Some(track))
-            .listen()
-            .flatten_stream()
-            .for_each(|json| {
-                println!("{}", json);
-                Ok(())
-            })
-            .map_err(|e| println!("error: {}", e));
-        rt::run(future);
+        let token = self.token.clone();
+        let track = self.track.clone();
+        thread::spawn(move || {
+            let track = &track[..];
+            let future = TwitterStreamBuilder::filter(&token)
+                .track(Some(track))
+                .listen()
+                .flatten_stream()
+                .for_each(|json| {
+                    println!("{}", json);
+                    Ok(())
+                })
+                .map_err(|e| println!("error: {}", e));
+            rt::run(future);
+        });
+        loop {}
     }
 }
