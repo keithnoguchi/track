@@ -2,7 +2,7 @@
 
 [![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
-Realtime [Twitter] trend tracker in [Rust].
+Real time [Twitter] trend tracker in [Rust].
 
 [![AsciiCast]](https://asciinema.org/a/276420)
 
@@ -17,16 +17,16 @@ Here is the high level design diagram of the `track`.  It's based
 on the standard worker pattern, which runs multiple `track::Workers`
 to retrieve the specific trend through [twitter-stream] [Rust]
 crate and send it through the `std::sync::mpsc` channel to report
-it back to the `track::Tracker` aggregater.  `track::Tracker`
+it back to the `track::Tracker` aggregator.  `track::Tracker`
 creates a dedicate `std::thread` to report the live update through
 [indicatif] [Rust] crate.  Since the communication between
 `track::Tracker` and `track::Worker` is over `std::sync::mpsc` channel,
 it can easily add more workers to support multiple tracks.
 
-But due to the [Twitter stream API] rate limitting, you can't have
+But due to the [Twitter stream API] rate limiting, you can't have
 more than two TCP sessions from the same IP.  To overcome this
 challenge, we'll move to the distributed design by running those
-workers on a differnt machines, as mentioned in [to-do](#to-do).
+workers on a different machines, as mentioned in [to-do](#to-do).
 
 ```
 +---------------------------------------------------------------+
@@ -50,7 +50,7 @@ workers on a differnt machines, as mentioned in [to-do](#to-do).
 +---------------------------------------------------------------+
 ```
 
-## Pre-requisite
+## Prerequisite
 
 Thanks to [Rust]'s clean design, there is not much you need to make `track`
 up and running, as in those two docker files, for [ArchLinux] and [Ubuntu18.04],
@@ -62,7 +62,7 @@ to go.
 
 ## Environment variables
 
-track uses [Twitter stream APIs] to track the realtime twitter trend.
+track uses [Twitter stream APIs] to track the real time twitter trend.
 To do that, you need the consumer and access keys set through the
 environment variable.  You can request yours through [Twitter developer site]:
 
@@ -79,7 +79,7 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 
 ## Run
 
-`make run` execute the `carge run`, which dumps the realtime trend of multiple tracks.
+`make run` execute the `cargo run`, which dumps the realtime trend of multiple tracks.
 
 ```sh
 $ make run
