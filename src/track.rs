@@ -10,6 +10,8 @@ pub struct Tracker {
     workers: Vec<Worker>,
     receiver: Arc<Mutex<mpsc::Receiver<Event>>>,
     delay_in_msec: u64,
+    sample_count: u64,
+    total_count: u64,
 }
 
 impl Tracker {
@@ -18,6 +20,8 @@ impl Tracker {
         let sender = Arc::new(Mutex::new(sender));
         let receiver = Arc::new(Mutex::new(receiver));
         let delay_in_msec = config.delay_in_msec;
+        let sample_count = config.sample_count;
+        let total_count = config.total_count;
         let mut workers = vec![];
         for track in &config.tracks {
             workers.push(Worker::new(&config, track, Arc::clone(&sender)));
@@ -26,6 +30,8 @@ impl Tracker {
             workers,
             receiver,
             delay_in_msec,
+            sample_count,
+            total_count,
         }
     }
     pub fn run(&mut self) {
@@ -43,15 +49,21 @@ impl Tracker {
             .progress_chars("##-");
         let mut bars = HashMap::new();
         for w in &self.workers {
-            let pb = chart.add(ProgressBar::new(1000));
+            let pb = chart.add(ProgressBar::new(self.sample_count));
             pb.set_style(sty.clone());
             bars.insert(w.track.parse::<Event>().unwrap(), pb);
         }
         let receiver = Arc::clone(&self.receiver);
+        let sample_count = self.sample_count;
+        let total_count = self.total_count;
         thread::spawn(move || {
-            for _ in 0..2000 {
+            for _ in 0..total_count {
                 let e = receiver.lock().unwrap().recv().unwrap();
                 let pb = bars.get(&e).unwrap();
+                if pb.position() == sample_count {
+                    pb.finish();
+                    continue;
+                }
                 pb.set_message(&format!("{} trends:", e));
                 pb.inc(1);
             }
