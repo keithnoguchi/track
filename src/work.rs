@@ -1,16 +1,22 @@
 // SPDX-License-Identifier: GPL-2.0
 extern crate twitter_stream;
 
+use super::Track;
+use std::sync::mpsc;
+use std::sync::Arc;
+use std::sync::Mutex;
 use std::thread;
+use std::time;
 
 pub struct Worker {
     token: twitter_stream::Token,
     track: String,
+    sender: Arc<Mutex<mpsc::Sender<Track>>>,
     thread: Option<thread::JoinHandle<()>>,
 }
 
 impl Worker {
-    pub fn new(c: &super::Config, track: &str) -> Worker {
+    pub fn new(c: &super::Config, track: &str, sender: Arc<Mutex<mpsc::Sender<Track>>>) -> Worker {
         let token = twitter_stream::Token::new(
             c.consumer_key.clone(),
             c.consumer_sec.clone(),
@@ -21,22 +27,26 @@ impl Worker {
         Worker {
             token,
             track,
+            sender,
             thread: None,
         }
     }
-    pub fn run(&mut self) {
+    pub fn run(&mut self, delay: time::Duration) {
         use twitter_stream::rt::{self, Future, Stream};
         use twitter_stream::TwitterStreamBuilder;
         let token = self.token.clone();
         let track = self.track.clone();
+        let sender = Arc::clone(&self.sender);
         let thread = thread::spawn(move || {
+            thread::sleep(delay);
             let track = &track[..];
             let future = TwitterStreamBuilder::filter(&token)
                 .track(Some(track))
                 .listen()
                 .flatten_stream()
-                .for_each(|json| {
-                    println!("{}", json);
+                .for_each(move |_json| {
+                    //println!("{}", _json);
+                    sender.lock().unwrap().send(Track::Twitter).unwrap();
                     Ok(())
                 })
                 .map_err(|e| println!("error: {}", e));
