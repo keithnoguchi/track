@@ -2,7 +2,7 @@
 use std::fmt;
 use std::str;
 
-#[derive(Eq, PartialEq, Hash, Clone, Copy, Debug)]
+#[derive(Eq, PartialEq, Hash, Clone, Copy)]
 pub enum Event {
     Twitter,
     Facebook,
@@ -17,7 +17,7 @@ pub enum Event {
     Other,
 }
 
-impl fmt::Display for Event {
+impl fmt::Debug for Event {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Event::Twitter => write!(f, "T"),
@@ -31,6 +31,24 @@ impl fmt::Display for Event {
             Event::Fashion => write!(f, "Fa"),
             Event::Food => write!(f, "Fo"),
             _ => write!(f, "."),
+        }
+    }
+}
+
+impl fmt::Display for Event {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Event::Twitter => write!(f, "Twitter"),
+            Event::Facebook => write!(f, "Facebook"),
+            Event::Google => write!(f, "Google"),
+            Event::Travel => write!(f, "Travel"),
+            Event::Art => write!(f, "Art"),
+            Event::Music => write!(f, "Music"),
+            Event::Photography => write!(f, "Photography"),
+            Event::Love => write!(f, "Love"),
+            Event::Fashion => write!(f, "Fashion"),
+            Event::Food => write!(f, "Food"),
+            _ => write!(f, "Other"),
         }
     }
 }

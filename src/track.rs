@@ -39,7 +39,7 @@ impl Tracker {
     fn chart(&self) {
         let chart = MultiProgress::new();
         let sty = ProgressStyle::default_bar()
-            .template("{msg:12}: {bar:40.cyan/blue} {pos:>7}/{len:7} [{elapsed_precise}]")
+            .template("{msg:18} {bar:36.cyan/blue} {pos:>7}/{len:7} [{elapsed_precise}]")
             .progress_chars("##-");
         let mut bars = HashMap::new();
         for w in &self.workers {
@@ -52,7 +52,7 @@ impl Tracker {
             for _ in 0..2000 {
                 let e = receiver.lock().unwrap().recv().unwrap();
                 let pb = bars.get(&e).unwrap();
-                pb.set_message(&format!("{}", e));
+                pb.set_message(&format!("{} trends:", e));
                 pb.inc(1);
             }
         });
@@ -61,7 +61,7 @@ impl Tracker {
     /// dump the result to the standard out forver
     fn _dump(&self) {
         loop {
-            eprint!("{}", self.receiver.lock().unwrap().recv().unwrap());
+            eprint!("{:?}", self.receiver.lock().unwrap().recv().unwrap());
         }
     }
 }
