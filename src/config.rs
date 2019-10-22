@@ -18,14 +18,14 @@ impl Config {
         let tracks = vec![
             "twitter",
             "facebook",
-            "google",
-            "travel",
-            "art",
-            "music",
-            "photography",
-            "love",
-            "fashion",
-            "food",
+            //"google",
+            //"travel",
+            //"art",
+            //"music",
+            //"photography",
+            //"love",
+            //"fashion",
+            //"food",
         ];
         Config {
             consumer_key,
@@ -44,14 +44,14 @@ mod tests {
         let want = vec![
             "twitter",
             "facebook",
-            "google",
-            "travel",
-            "art",
-            "music",
-            "photography",
-            "love",
-            "fashion",
-            "food",
+            //"google",
+            //"travel",
+            //"art",
+            //"music",
+            //"photography",
+            //"love",
+            //"fashion",
+            //"food",
         ];
         let config = super::Config::new();
         assert_eq!(want, config.tracks);
