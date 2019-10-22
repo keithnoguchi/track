@@ -7,6 +7,8 @@ test:
 	@cargo test
 clean:
 	@cargo clean
+doc:
+	@cargo doc --all --open
 fmt:
 	@rustfmt --check src/*.rs
 # CI targets.
