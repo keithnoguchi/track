@@ -2,11 +2,11 @@
 extern crate twitter_stream;
 
 use super::Track;
-use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
+use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
-use std::time;
+use std::time::Duration;
+use twitter_stream::rt::{self, Future, Stream};
+use twitter_stream::TwitterStreamBuilder;
 
 pub struct Worker {
     token: twitter_stream::Token,
@@ -31,9 +31,7 @@ impl Worker {
             thread: None,
         }
     }
-    pub fn run(&mut self, delay: time::Duration) {
-        use twitter_stream::rt::{self, Future, Stream};
-        use twitter_stream::TwitterStreamBuilder;
+    pub fn run(&mut self, delay: Duration) {
         let msg = self.track.parse::<super::Track>().unwrap();
         let token = self.token.clone();
         let track = self.track.clone();
