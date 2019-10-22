@@ -45,14 +45,15 @@ impl Tracker {
             w.run(Duration::from_millis(delay));
             delay += self.delay_in_msec;
         }
-        // Only 100 events for now
         loop {
-            let e = self.receiver.recv().unwrap();
             //let pb = self.bars.get(&e).unwrap();
             //pb.set_message(&format!("{}", e));
             //pb.inc(1);
-            eprint!("{}", e);
+            self.dump();
         }
         //self._chart.join_and_clear().unwrap();
+    }
+    fn dump(&self) {
+        eprint!("{}", self.receiver.recv().unwrap());
     }
 }
