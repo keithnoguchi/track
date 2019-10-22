@@ -49,7 +49,7 @@ impl Tracker {
         }
         let receiver = Arc::clone(&self.receiver);
         thread::spawn(move || {
-            for _ in 0..1000 {
+            for _ in 0..2000 {
                 let e = receiver.lock().unwrap().recv().unwrap();
                 let pb = bars.get(&e).unwrap();
                 pb.set_message(&format!("{}", e));
