@@ -26,7 +26,7 @@ it can easily add more workers to support multiple tracks.
 But due to the [Twitter stream API] rate limitting, you can't have
 more than two TCP sessions from the same IP.  To overcome this
 challenge, we'll move to the distributed design by running those
-workers on a differnt machines.
+workers on a differnt machines, as mentioned in [to-do](#to-do).
 
 ```
 +---------------------------------------------------------------+
@@ -139,6 +139,16 @@ running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
+
+## To-do
+
+Here is the list of to-do:
+
+- [ ] Support more than two tracks
+- [ ] More unit tests
+- [ ] Documentation
+- [ ] Better ownership
+- [ ] Better summary
 
 ## Special Thanks
 
