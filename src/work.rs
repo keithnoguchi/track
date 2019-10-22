@@ -6,6 +6,7 @@ use std::thread;
 pub struct Worker {
     token: twitter_stream::Token,
     track: String,
+    thread: Option<thread::JoinHandle<()>>,
 }
 
 impl Worker {
@@ -17,14 +18,18 @@ impl Worker {
             c.access_sec.clone(),
         );
         let track = track.to_string();
-        Worker { token, track }
+        Worker {
+            token,
+            track,
+            thread: None,
+        }
     }
-    pub fn run(&self) {
+    pub fn run(&mut self) {
         use twitter_stream::rt::{self, Future, Stream};
         use twitter_stream::TwitterStreamBuilder;
         let token = self.token.clone();
         let track = self.track.clone();
-        thread::spawn(move || {
+        let thread = thread::spawn(move || {
             let track = &track[..];
             let future = TwitterStreamBuilder::filter(&token)
                 .track(Some(track))
@@ -37,5 +42,6 @@ impl Worker {
                 .map_err(|e| println!("error: {}", e));
             rt::run(future);
         });
+        self.thread = Some(thread);
     }
 }

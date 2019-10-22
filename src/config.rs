@@ -16,7 +16,7 @@ impl Config {
         let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or("dummy".to_string());
         let access_sec = env::var("TRACK_ACCESS_SECRET").unwrap_or("dummy".to_string());
         let tracks = vec![
-            "twitter",
+            //"twitter",
             "facebook",
             //"google",
             //"travel",
@@ -42,7 +42,7 @@ mod tests {
     #[test]
     fn default_track_entries() {
         let want = vec![
-            "twitter",
+            //"twitter",
             "facebook",
             //"google",
             //"travel",

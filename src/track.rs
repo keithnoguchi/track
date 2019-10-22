@@ -13,7 +13,7 @@ impl Tracker {
         Tracker { workers }
     }
     pub fn run(&mut self) {
-        for w in &self.workers {
+        for w in &mut self.workers {
             w.run();
         }
         loop {}
