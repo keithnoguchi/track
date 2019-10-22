@@ -34,6 +34,7 @@ impl Worker {
     pub fn run(&mut self, delay: time::Duration) {
         use twitter_stream::rt::{self, Future, Stream};
         use twitter_stream::TwitterStreamBuilder;
+        let msg = self.track.parse::<super::Track>().unwrap();
         let token = self.token.clone();
         let track = self.track.clone();
         let sender = Arc::clone(&self.sender);
@@ -46,7 +47,7 @@ impl Worker {
                 .flatten_stream()
                 .for_each(move |_json| {
                     //println!("{}", _json);
-                    sender.lock().unwrap().send(Track::Twitter).unwrap();
+                    sender.lock().unwrap().send(msg).unwrap();
                     Ok(())
                 })
                 .map_err(|e| println!("error: {}", e));

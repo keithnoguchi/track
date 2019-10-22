@@ -16,7 +16,7 @@ impl Config {
         let consumer_sec = env::var("TRACK_CONSUMER_SECRET").unwrap_or("dummy".to_string());
         let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or("dummy".to_string());
         let access_sec = env::var("TRACK_ACCESS_SECRET").unwrap_or("dummy".to_string());
-        let delay_in_sec = 30;
+        let delay_in_sec = 1;
         let tracks = vec![
             "twitter",
             "facebook",
@@ -62,6 +62,6 @@ mod tests {
     #[test]
     fn delay_in_sec() {
         let config = super::Config::new();
-        assert_eq!(30, config.delay_in_sec);
+        assert_eq!(1, config.delay_in_sec);
     }
 }

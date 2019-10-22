@@ -1,15 +1,41 @@
 // SPDX-License-Identifier: GPL-2.0
 use super::work::Worker;
+use std::fmt;
+use std::str;
 use std::sync::mpsc;
 use std::sync::Arc;
 use std::sync::Mutex;
 use std::time;
 
+#[derive(Clone, Copy)]
 pub enum Track {
     Twitter,
     Facebook,
     Google,
     Other,
+}
+
+impl fmt::Display for Track {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Track::Twitter => write!(f, "T"),
+            Track::Facebook => write!(f, "F"),
+            Track::Google => write!(f, "G"),
+            _ => write!(f, "."),
+        }
+    }
+}
+
+impl str::FromStr for Track {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Track, ()> {
+        match s {
+            "twitter" => Ok(Track::Twitter),
+            "facebook" => Ok(Track::Facebook),
+            "google" => Ok(Track::Google),
+            _ => Ok(Track::Other),
+        }
+    }
 }
 
 pub struct Tracker {
@@ -40,8 +66,7 @@ impl Tracker {
             delay += self.delay_in_sec;
         }
         loop {
-            self.receiver.recv().unwrap();
-            eprint!(".");
+            eprint!("{}", self.receiver.recv().unwrap())
         }
     }
 }
