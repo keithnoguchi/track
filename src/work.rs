@@ -37,6 +37,5 @@ impl Worker {
                 .map_err(|e| println!("error: {}", e));
             rt::run(future);
         });
-        loop {}
     }
 }

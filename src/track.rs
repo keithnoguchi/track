@@ -13,7 +13,9 @@ impl Tracker {
         Tracker { workers }
     }
     pub fn run(&mut self) {
-        // XXX Single worker only for now.
-        self.workers[0].run();
+        for w in &self.workers {
+            w.run();
+        }
+        loop {}
     }
 }
