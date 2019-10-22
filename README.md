@@ -4,6 +4,11 @@
 
 Real time [Twitter] trend tracker in [Rust].
 
+```sh
+$ track
+Twitter trend:     ##################------------------     491/1000    [00:01:37]
+Facebook trend:    ##########################----------     711/1000    [00:01:29]
+```
 [![AsciiCast]](https://asciinema.org/a/276420)
 
 [Twitter]: https://twitter.com
@@ -82,16 +87,13 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 `make run` execute the `cargo run`, which dumps the realtime trend of multiple tracks.
 
 ```sh
+
 $ make run
     Finished dev [unoptimized + debuginfo] target(s) in 0.05s
      Running `target/debug/track`
-TTTFFTFTFFTTTTTTTFTFTFTFTTTTTTTTTTTFTTTTFTTTTTTFTTTTTTTTTFTTFFTTFFTFFFFFFFFFTF
-TTTTTTTFTFTTFTTTTTTTTTTTTFFTTTTTTTTFTTFTTFTTTTTTFTTFFFTTFTFTTTTTFFFFFFFFFFFFFF
-FFFFFFFFFTFTFTTTTTTTTTTTTTTTTTTTTTTTTTTTTFFFTFFTTTTTTTTFFFFFFTTTTTTTTTTTTFFFFF
-FFFFFFFFFFFFFFFTTFTTTTTTTTTTTTTTTTTTTTFTTTTTTTTFTTTTTFFFFFFFFFFFFFTFFTTFFTTFTT
-TTFTTFTTTFTTFTFFTTFFTTTTTTTTTTTTTTTTTTTTFTTTTTTTTFTTFTTTTTTTTTTTTFFFFFFFFFFFFF
-FFTFTFTFFFFFTTTFFTTTTFTFTTFTTTTTTTTTFTTTTTFFFFFFFFTFFTTTTFFFFTTTTTTFFTTTTTTTTT
-TFTTT^C
+Twitter trend:     ##----------------------------------      35/1000    [00:00:19]
+Facebook trend:    ####--------------------------------      85/1000    [00:00:19]
+^C
 ```
 
 Currently, `track` only tracks two trends, Twitter and Facebook, as in [config.rs],
