@@ -211,11 +211,11 @@ $ make install
 
 Here is the list of to-dos:
 
-- [ ] Support any keywords
-- [ ] Responsive output for less popular keywords
-- [ ] Graceful shutdown
-- [ ] Support more than two tracks
 - [ ] More unit tests
+- [ ] Graceful shutdown
+- [ ] Remove keyword limit
+- [ ] Responsive output for less popular keywords
+- [ ] Support more than two tracks
 - [ ] Documentation
 
 ## Special Thanks
