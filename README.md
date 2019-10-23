@@ -6,6 +6,7 @@ Real time [Twitter] trend tracker in [Rust].
 
 - [Design](#design)
 - [Prerequisite](#prerequisite)
+  - [Key and Token](key-and-token)
 - [Run](#run)
 - [Test](#test)
 - [Install](#install)
@@ -99,11 +100,12 @@ to go.
 [ArchLinux]: Dockerfile.arch64
 [Ubuntu18.04]: Dockerfile.ubuntu64
 
-### Environment variables
+### Key and Token
 
 track uses [Twitter stream APIs] to track the real time twitter trend.
-To do that, you need the consumer and access keys set through the
-environment variable.  You can request yours through [Twitter developer site]:
+To do that, you need to provide the consumer key and the access token
+through the environment variables.  You can request key and token
+through [Twitter developer site] under [Apps section]:
 
 
 ```sh
@@ -115,6 +117,7 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 
 [Twitter stream APIs]: https://developer.twitter.com/en/docs/tweets/filter-realtime/api-reference/post-statuses-filter
 [Twitter developer site]: https://developer.twitter.com/
+[Apps section]: https://developer.twitter.com/en/apps
 
 ## Run
 
