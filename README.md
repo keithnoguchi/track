@@ -5,16 +5,10 @@
 Real time [Twitter] trend tracker in [Rust].
 
 ```sh
-$ track
+$ track twitter facebook
 Twitter trend:     ##################------------------     491/1000    [00:01:37]
 Facebook trend:    ##########################----------     711/1000    [00:01:29]
 ```
-[![AsciiCast]](https://asciinema.org/a/276420)
-
-[Twitter]: https://twitter.com
-[Rust]: https://www.rust-lang.org
-[CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
-[AsciiCast]: https://asciinema.org/a/276420.svg
 
 - [Design](#design)
 - [Prerequisite](#prerequisite)
@@ -23,6 +17,13 @@ Facebook trend:    ##########################----------     711/1000    [00:01:2
 - [Install](#install)
 - [To-do](#to-do)
 - [Special Thanks](#special-thanks)
+
+[![AsciiCast]](https://asciinema.org/a/276420)
+
+[Twitter]: https://twitter.com
+[Rust]: https://www.rust-lang.org
+[CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
+[AsciiCast]: https://asciinema.org/a/276420.svg
 
 ## Design
 
