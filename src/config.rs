@@ -21,9 +21,9 @@ impl Config {
         let delay_in_msec = 10;
         let sample_count = 1000;
         let tracks = vec![
-            "twitter",
+            //"twitter",
             "facebook",
-            //"google",
+            "google",
             //"travel",
             //"art",
             //"music",
@@ -51,9 +51,9 @@ mod tests {
     #[test]
     fn default_track_entries() {
         let want = vec![
-            "twitter",
+            //"twitter",
             "facebook",
-            //"google",
+            "google",
             //"travel",
             //"art",
             //"music",
