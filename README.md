@@ -12,9 +12,9 @@ on the [Twitter] platform.
 - [Design](#design)
 - [Prerequisite](#prerequisite)
   - [Key and Token](#key-and-token)
-- [Run](#run)
 - [Test](#test)
-- [Install](#install)
+- [Execution](#execution)
+- [Installation](#installation)
 - [To-do](#to-do)
 - [Special Thanks](#special-thanks)
 
@@ -133,12 +133,46 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 [Twitter developer site]: https://developer.twitter.com/
 [Apps section]: https://developer.twitter.com/en/apps
 
-## Run
+## Test
 
-`make run` execute the `cargo run`, which dumps the real-time trend of multiple tracks.
+`make test` is a wrapper of `cargo test`.  I'll add more tests along the way.
 
 ```sh
+$ make test
+   Compiling track v0.1.1 (/home/kei/git/track)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.29s
+     Running target/debug/deps/track-386d81d60ee5b79d
 
+running 5 tests
+test config::tests::default_tracks ... ok
+test config::tests::delay_in_msec ... ok
+test config::tests::sample_count ... ok
+test config::tests::total_count ... ok
+test event::tests::from_str ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+     Running target/debug/deps/track-c4ec65894b1782cc
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+   Doc-tests track
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+$
+```
+
+## Execution
+
+`make run` is the wrapper of `cargo run`.  It shows the current real-time
+trend of two default keywords, 'twitter' and 'facebook'.
+
+```sh
 $ make run
     Finished dev [unoptimized + debuginfo] target(s) in 0.05s
      Running `target/debug/track`
@@ -147,9 +181,14 @@ Facebook trend:    ####--------------------------------      85/1000    [00:00:1
 ^C
 ```
 
-Currently, `track` only tracks two trends, Twitter and Facebook, as in [config.rs],
-due to the [420 HTTP error].  Here is the `netstat` output and it only allows
-two concurrent TCP sessions.
+Currently, `track` only checks the two trend simultaneously.  This is because
+[Twitter streaming APIs] only support two concurrent TCP session from the same
+source, due to the rate limitting.  One way to overcome this limitation is to
+run the workers on different machines.
+
+Here is the `netstat` output while running the the modified version of `track`,
+which spawns 10 workers.  As you can see, there are only two established
+TCP sessions created by `track`.
 
 ```sh
 $ netstat -cntp
@@ -165,35 +204,7 @@ tcp        0      0 192.168.255.198:36488   199.59.150.42:443       ESTABLISHED 
 [config.rs]: src/config.rs
 [420 HTTP error]: https://developer.twitter.com/en/docs/basics/response-codes
 
-## Test
-
-Only two tests, but hey, it's still day one. :)
-
-```sh
-$ make test
-    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
-     Running target/debug/deps/track-00858257248e53cb
-
-running 2 tests
-test config::tests::default_track_entries ... ok
-test config::tests::delay_in_sec ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/track-88188b4c62ebad95
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests track
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-```
-
-## Install
+## Installation
 
 make install will call `cargo install --force --path .` to install `track`
 into your default cargo executable path:
