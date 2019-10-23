@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0
 FROM archlinux/base
-RUN pacman -Sy --noconfirm make gcc rust
-# For OpenSSL for Rust
-RUN pacman -Sy --noconfirm openssl pkgconf
+RUN pacman -Sy --noconfirm make gcc pkgconf rust
 WORKDIR /home/build
 CMD ["make"]
