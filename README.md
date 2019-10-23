@@ -4,6 +4,14 @@
 
 Real time [Twitter] trend tracker in [Rust].
 
+- [Design](#design)
+- [Prerequisite](#prerequisite)
+- [Run](#run)
+- [Test](#test)
+- [Install](#install)
+- [To-do](#to-do)
+- [Special Thanks](#special-thanks)
+
 ```sh
 $ track -h
 Usage: track [-h] [<first track name> <second track name>]
@@ -34,14 +42,6 @@ $ track love food
 Love trend:        #################-------------------     457/1000    [00:00:12]
 Food trend:        ##----------------------------------      52/1000    [00:00:12]
 ```
-
-- [Design](#design)
-- [Prerequisite](#prerequisite)
-- [Run](#run)
-- [Test](#test)
-- [Install](#install)
-- [To-do](#to-do)
-- [Special Thanks](#special-thanks)
 
 [![AsciiCast]](https://asciinema.org/a/276420)
 
@@ -99,7 +99,7 @@ to go.
 [ArchLinux]: Dockerfile.arch64
 [Ubuntu18.04]: Dockerfile.ubuntu64
 
-## Environment variables
+### Environment variables
 
 track uses [Twitter stream APIs] to track the real time twitter trend.
 To do that, you need the consumer and access keys set through the
