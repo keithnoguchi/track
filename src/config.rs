@@ -65,16 +65,16 @@ those through the command line arguments, e.g. 'track love food'.
 
 Here is the list of supported tracks:
 
-art
+twitter
 facebook
-fashion
-food
 google
-love
+travel
+art
 music
 photography
-travel
-twitter"#;
+love
+fashion
+food"#;
         println!(
             "Usage: {} [-h] [<first track name> <second track name>] {}",
             progname, description

@@ -22,16 +22,16 @@ those through the command line arguments, e.g. track love food.
 
 Here are the list of supported tracks:
 
-art
+twitter
 facebook
-fashion
-food
 google
-love
+travel
+art
 music
 photography
-travel
-twitter
+love
+fashion
+food
 ```
 ```sh
 $ track
