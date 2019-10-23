@@ -5,9 +5,21 @@
 Real time [Twitter] trend tracker in [Rust].
 
 ```sh
-$ track twitter facebook
-Twitter trend:     ##################------------------     491/1000    [00:01:37]
-Facebook trend:    ##########################----------     711/1000    [00:01:29]
+$ track -h
+Usage: track [-h] [<first track name> <second track name>]
+
+'twitter' and 'facebook' are the default track names.  You can override
+those through the command line arguments, e.g. track love food.
+```
+```sh
+$ track
+Twitter trend:     ######################--------------     611/1000    [00:00:10]
+Facebook trend:    #######-----------------------------     186/1000    [00:00:11]
+```
+```sh
+$ track love food
+Love trend:        #################-------------------     457/1000    [00:00:12]
+Food trend:        ##----------------------------------      52/1000    [00:00:12]
 ```
 
 - [Design](#design)
@@ -93,7 +105,7 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 
 ## Run
 
-`make run` execute the `cargo run`, which dumps the realtime trend of multiple tracks.
+`make run` execute the `cargo run`, which dumps the real time trend of multiple tracks.
 
 ```sh
 

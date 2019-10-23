@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0
-use std::env;
+use std::{env, process};
 
 pub struct Config {
     pub consumer_key: String,
@@ -15,6 +15,9 @@ pub struct Config {
 
 impl Config {
     pub fn new(argv: Vec<String>) -> Config {
+        if argv.contains(&"-h".to_string()) {
+            Config::usage(&argv[0]);
+        }
         let consumer_key = env::var("TRACK_CONSUMER_KEY").unwrap_or("dummy".to_string());
         let consumer_sec = env::var("TRACK_CONSUMER_SECRET").unwrap_or("dummy".to_string());
         let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or("dummy".to_string());
@@ -38,8 +41,8 @@ impl Config {
             tracks.push(argv[1].clone());
             tracks.push(argv[2].clone());
         } else {
+            tracks.push("twitter".to_string());
             tracks.push("facebook".to_string());
-            tracks.push("google".to_string());
         }
         let total_count = tracks.len() as u64 * sample_count;
         Config {
@@ -53,6 +56,15 @@ impl Config {
             default_tracks,
             tracks,
         }
+    }
+    fn usage(progname: &String) {
+        let description = r#"
+
+'twitter' and 'facebook' are the default track names.  You can override
+those through the command line arguments, e.g. 'track love food'."#;
+        println!("Usage: {} [-h] [<first track name> <second track name>] {}",
+                 progname, description);
+        process::exit(0);
     }
 }
 
