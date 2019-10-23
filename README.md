@@ -93,9 +93,11 @@ workers on a different machines, as mentioned in [to-do](#to-do).
 ## Prerequisite
 
 Thanks to [Rust]'s clean design, there is not much you need to make `track`
-up and running, as in those two docker files, for [ArchLinux] and [Ubuntu18.04],
-respectively.  Just install the standard [Rust] packages and you're good
-to go except one thing, [Key and Token].  Let's take care of it, next.
+up and running, as in those two docker files, for [ArchLinux] and
+[Ubuntu18.04], respectively.  Just install the standard [Rust] packages and
+you're good to go except one thing, [Key and Token](#key-and-token).
+
+Let's take care of that quick before the party.
 
 [ArchLinux]: Dockerfile.arch64
 [Ubuntu18.04]: Dockerfile.ubuntu64
