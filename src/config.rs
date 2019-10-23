@@ -61,7 +61,21 @@ impl Config {
         let description = r#"
 
 'twitter' and 'facebook' are the default track names.  You can override
-those through the command line arguments, e.g. 'track love food'."#;
+those through the command line arguments, e.g. 'track love food'.
+
+Here are the list of supported tracks:
+
+art
+facebook
+fashion
+food
+google
+love
+music
+photography
+travel
+twitter
+"#;
         println!(
             "Usage: {} [-h] [<first track name> <second track name>] {}",
             progname, description
