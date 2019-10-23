@@ -2,7 +2,7 @@
 
 [![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
-Real time [Twitter] trend tracker in [Rust].
+A real time [Twitter] trend tracker in [Rust].
 
 - [Design](#design)
 - [Prerequisite](#prerequisite)
@@ -97,7 +97,7 @@ up and running, as in those two docker files, for [ArchLinux] and
 [Ubuntu18.04], respectively.  Just install the standard [Rust] packages and
 you're good to go except one thing, [Key and Token](#key-and-token).
 
-Let's take care of that quick before the party.
+Let's take care of that quick before the party starts.
 
 [ArchLinux]: Dockerfile.arch64
 [Ubuntu18.04]: Dockerfile.ubuntu64
