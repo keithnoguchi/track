@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
-.PHONY: test clean run doc fmt
-all: fmt check test run
+.PHONY: check test clean run install doc fmt
+all: fmt test run
 check:
 	@cargo check
 test:
@@ -9,6 +9,8 @@ clean:
 	@cargo clean
 run:
 	@cargo run
+install:
+	@cargo install --force --path .
 doc:
 	@cargo doc --all --open
 fmt:

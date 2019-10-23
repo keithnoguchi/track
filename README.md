@@ -16,6 +16,14 @@ Facebook trend:    ##########################----------     711/1000    [00:01:2
 [CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
 [AsciiCast]: https://asciinema.org/a/276420.svg
 
+- [Design](#design)
+- [Prerequisite](#prerequisite)
+- [Run](#run)
+- [Test](#test)
+- [Install](#install)
+- [To-do](#to-do)
+- [Special Thanks](#special-thanks)
+
 ## Design
 
 Here is the high level design diagram of the `track`.  It's based
@@ -140,6 +148,20 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+## Install
+
+make install will call `cargo install --force --path .` to install `track`
+into your default cargo executable path:
+
+```sh
+$ make install
+  Installing track v0.1.1 (/home/kei/git/track)
+    Updating crates.io index
+    Finished release [optimized] target(s) in 0.29s
+   Replacing /home/kei/.cargo/bin/track
+    Replaced package `track v0.1.1 (/home/kei/git/track)` with `track v0.1.1 (/home/kei/git/track)` (executable `track`)
 ```
 
 ## To-do
