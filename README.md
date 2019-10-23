@@ -2,7 +2,11 @@
 
 [![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
-A real time [Twitter] trend tracker in [Rust].
+A real time [Twitter] trend tracker in [Rust].  Upon running this
+command line application, `track` will compare the two provided
+channel keywords streaming on the [Twitter] platform to judge
+a comparison of the two topics in terms of popularity and presence
+on the [Twitter] platform.
 
 - [Design](#design)
 - [Prerequisite](#prerequisite)
@@ -14,13 +18,20 @@ A real time [Twitter] trend tracker in [Rust].
 - [Special Thanks](#special-thanks)
 
 ```sh
-$ track -h
+air2$ track -h
 Usage: track [-h] [<first track name> <second track name>]
 
-'twitter' and 'facebook' are the default track names.  You can override
-those through the command line arguments, e.g. track love food.
+A real time Twitter trend tracker in Rust.
 
-Here are the list of supported tracks:
+Upon running this command line application, track will compare
+the two provided channel keywords streaming on the Twitter platform
+to judge a comparison of the two topics in terms of popularity and
+presence on the Twitter platform.
+
+'twitter' and 'facebook' are the default keywords.  You can override
+those through the command line arguments, e.g. 'track love food'.
+
+Here is the list of currently supported keywords:
 
 twitter
 facebook

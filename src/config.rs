@@ -60,10 +60,17 @@ impl Config {
     fn usage(progname: &String) {
         let description = r#"
 
-'twitter' and 'facebook' are the default track names.  You can override
+A real time Twitter trend tracker in Rust.
+
+Upon running this command line application, track will compare
+the two provided channel keywords streaming on the Twitter platform
+to judge a comparison of the two topics in terms of popularity and
+presence on the Twitter platform.
+
+'twitter' and 'facebook' are the default keywords.  You can override
 those through the command line arguments, e.g. 'track love food'.
 
-Here is the list of supported tracks:
+Here is the list of currently supported keywords:
 
 twitter
 facebook
