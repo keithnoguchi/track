@@ -2,7 +2,7 @@
 
 [![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
-A real time [Twitter] trend tracker in [Rust].
+A real-time [Twitter] trend tracker in [Rust].
 
 Upon running this application, `track` will compare the two provided
 channel keywords streaming on the [Twitter] platform to judge
@@ -22,7 +22,7 @@ on the [Twitter] platform.
 air2$ track -h
 Usage: track [-h] [<first track name> <second track name>]
 
-A real time Twitter trend tracker in Rust.
+A real-time Twitter trend tracker in Rust.
 
 Upon running this application, track will compare the two provided
 channel keywords streaming on the Twitter platform to judge
@@ -116,7 +116,7 @@ Let's take care of that quick before the party starts.
 
 ### Key and Token
 
-track uses [Twitter stream APIs] to track the real time twitter trend.
+track uses [Twitter stream APIs] to track the real-time twitter trend.
 To do that, you need to provide the consumer key and the access token
 through the environment variables.  You can request key and token
 through [Twitter developer site] under [Apps section]:
@@ -135,7 +135,7 @@ $ export TRACK_ACCESS_SECRET=your_access_token_secret
 
 ## Run
 
-`make run` execute the `cargo run`, which dumps the real time trend of multiple tracks.
+`make run` execute the `cargo run`, which dumps the real-time trend of multiple tracks.
 
 ```sh
 

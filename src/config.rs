@@ -60,7 +60,7 @@ impl Config {
     fn usage(progname: &String) {
         let description = r#"
 
-A real time Twitter trend tracker in Rust.
+A real-time Twitter trend tracker in Rust.
 
 Upon running this application, track will compare the two provided
 channel keywords streaming on the Twitter platform to judge
