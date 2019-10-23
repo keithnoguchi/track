@@ -63,7 +63,7 @@ impl Config {
 'twitter' and 'facebook' are the default track names.  You can override
 those through the command line arguments, e.g. 'track love food'.
 
-Here are the list of supported tracks:
+Here is the list of supported tracks:
 
 art
 facebook
@@ -74,8 +74,7 @@ love
 music
 photography
 travel
-twitter
-"#;
+twitter"#;
         println!(
             "Usage: {} [-h] [<first track name> <second track name>] {}",
             progname, description
