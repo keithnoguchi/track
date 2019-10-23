@@ -6,7 +6,7 @@ Real time [Twitter] trend tracker in [Rust].
 
 - [Design](#design)
 - [Prerequisite](#prerequisite)
-  - [Key and Token](key-and-token)
+  - [Key and Token](#key-and-token)
 - [Run](#run)
 - [Test](#test)
 - [Install](#install)
