@@ -62,8 +62,10 @@ impl Config {
 
 'twitter' and 'facebook' are the default track names.  You can override
 those through the command line arguments, e.g. 'track love food'."#;
-        println!("Usage: {} [-h] [<first track name> <second track name>] {}",
-                 progname, description);
+        println!(
+            "Usage: {} [-h] [<first track name> <second track name>] {}",
+            progname, description
+        );
         process::exit(0);
     }
 }
