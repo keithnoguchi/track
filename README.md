@@ -211,11 +211,12 @@ $ make install
 
 Here is the list of to-dos:
 
+- [ ] Support any keywords
+- [ ] Responsive output for less popular keywords
+- [ ] Graceful shutdown
 - [ ] Support more than two tracks
 - [ ] More unit tests
 - [ ] Documentation
-- [ ] Better ownership handling with Drop trait support
-- [ ] Better summary output
 
 ## Special Thanks
 
