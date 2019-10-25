@@ -233,9 +233,11 @@ Here is the list of to-dos:
 
 Thank you so much for those great crates to make track up and running!
 
+- [The book]: The Rust Programming Language
 - [twitter-stream]: A library for listening on Twitter Streaming API
 - [indicatif]: A Rust library for indicating progress in command line apps
 
+[The book]: https://github.com/rust-lang/book/
 [twitter-stream]: https://docs.rs/crate/twitter-stream/0.8.0
 [indicatif]: https://crates.io/crates/indicatif
 
