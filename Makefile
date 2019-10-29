@@ -14,7 +14,7 @@ install:
 doc:
 	@cargo doc --all --open
 fmt:
-	@rustfmt --check src/*.rs
+	@rustfmt --edition 2018 --check src/*.rs
 # CI targets.
 .PHONY: arch64 ubuntu64
 arch64: arch64-image
