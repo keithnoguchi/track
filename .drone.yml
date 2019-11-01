@@ -2,8 +2,13 @@ kind: pipeline
 type: docker
 name: default
 steps:
-  - name: check
+  - name: make on archlinux
     image: archlinux/base
     commands:
-      - uname -an
       - pacman -Sy --noconfirm make gcc pkgconf rustup
+      - rustup update nightly
+      - rustup default nightly
+      - make fmt
+      - make doc
+      - make
+      - make install
