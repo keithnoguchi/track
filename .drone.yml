@@ -1,0 +1,7 @@
+kind: pipeline
+name: default
+steps:
+  - name: check
+    image: none
+    commands:
+      - make check
