@@ -1,10 +1,9 @@
 kind: pipeline
-type: exec
+type: docker
 name: default
-platform:
-  os: linux
-  arch: amd64
 steps:
   - name: check
+    image: archlinux/base
     commands:
       - uname -an
+      - pacman -Sy --noconfirm make gcc pkgconf rustup
