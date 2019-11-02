@@ -9,21 +9,25 @@ steps:
       - rustup update nightly
       - rustup default nightly
   - name: format-archlinux
+    image: archlinux/base
     commands:
       - make fmt
     depends_on:
       - archlinux
   - name: test-archlinux
+    image: archlinux/base
     commands:
       - make test
     depends_on:
       - format-archlinux
   - name: doc-archlinux
+    image: archlinux/base
     commands:
       - make doc
     depends_on:
       - format-archlinux
   - name: install-archlinux
+    image: archlinux/base
     commands:
       - make install
     depends_on:
