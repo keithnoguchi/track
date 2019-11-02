@@ -2,34 +2,26 @@ kind: pipeline
 type: docker
 name: default
 steps:
-  - name: archlinux
-    image: archlinux/base
-    commands:
-      - pacman -Sy --noconfirm make gcc pkgconf rustup
-      - rustup update nightly
-      - rustup default nightly
-  - name: format-archlinux
-    image: archlinux/base
+  - name: format
+    image: rustlang/rust:nightly
     commands:
       - make fmt
-    depends_on:
-      - archlinux
-  - name: test-archlinux
-    image: archlinux/base
+  - name: test
+    image: rustlang/rust:nightly
     commands:
       - make test
     depends_on:
-      - format-archlinux
-  - name: doc-archlinux
-    image: archlinux/base
+      - format
+  - name: document
+    image: rustlang/rust:nightly
     commands:
       - make doc
     depends_on:
-      - format-archlinux
-  - name: install-archlinux
-    image: archlinux/base
+      - format
+  - name: install
+    image: rustlang/rust:nightly
     commands:
       - make install
     depends_on:
-      - test-archlinux
-      - doc-archlinux
+      - test
+      - document
