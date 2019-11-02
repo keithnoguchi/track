@@ -2,27 +2,30 @@ kind: pipeline
 type: docker
 name: default
 steps:
-  - name: make test on archlinux
+  - name: archlinux
     image: archlinux/base
     commands:
       - pacman -Sy --noconfirm make gcc pkgconf rustup
       - rustup update nightly
       - rustup default nightly
-      - make fmt
-      - make test
-      - make doc
-      - make install
-  - name: make test on ubuntu64 18.04
-    image: ubuntu:18.04
+  - name: format-archlinux
     commands:
-      - apt-get update
-      - apt-get install -y make gcc libssl-dev pkg-config curl
-      - curl https://sh.rustup.rs -sSf > rustup-init.sh
-      - sh rustup-init.sh -y
-      - export PATH="/drone/src/.cargo/bin:${PATH}"
-      - rustup update nightly
-      - rustup default nightly
       - make fmt
+    depends_on:
+      - archlinux
+  - name: test-archlinux
+    commands:
       - make test
+    depends_on:
+      - format-archlinux
+  - name: doc-archlinux
+    commands:
       - make doc
+    depends_on:
+      - format-archlinux
+  - name: install-archlinux
+    commands:
       - make install
+    depends_on:
+      - test-archlinux
+      - doc-archlinux
