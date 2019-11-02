@@ -9,6 +9,6 @@ steps:
       - rustup update nightly
       - rustup default nightly
       - make fmt
+      - make test
       - make doc
-      - make
       - make install
