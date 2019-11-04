@@ -1,7 +1,7 @@
 # track
 
-[![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 [![DroneCI]](https://cloud.drone.io/keithnoguchi/track)
+[![CircleCI]](https://circleci.com/gh/keithnoguchi/workflows/track)
 
 A real-time [Twitter] trend tracker in [Rust].
 
@@ -61,8 +61,8 @@ Food trend:        ##----------------------------------      52/1000    [00:00:1
 
 [Twitter]: https://twitter.com
 [Rust]: https://www.rust-lang.org
-[CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
 [DroneCI]: https://cloud.drone.io/api/badges/keithnoguchi/track/status.svg
+[CircleCI]: https://circleci.com/gh/keithnoguchi/track.svg?style=svg
 [AsciiCast]: https://asciinema.org/a/276420.svg
 
 ## Design
