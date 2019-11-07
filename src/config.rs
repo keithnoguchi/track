@@ -18,10 +18,10 @@ impl Config {
         if argv.contains(&"-h".to_string()) {
             Config::usage(&argv[0]);
         }
-        let consumer_key = env::var("TRACK_CONSUMER_KEY").unwrap_or("dummy".to_string());
-        let consumer_sec = env::var("TRACK_CONSUMER_SECRET").unwrap_or("dummy".to_string());
-        let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or("dummy".to_string());
-        let access_sec = env::var("TRACK_ACCESS_SECRET").unwrap_or("dummy".to_string());
+        let consumer_key = env::var("TRACK_CONSUMER_KEY").unwrap_or_default();
+        let consumer_sec = env::var("TRACK_CONSUMER_SECRET").unwrap_or_default();
+        let access_tkn = env::var("TRACK_ACCESS_TOKEN").unwrap_or_default();
+        let access_sec = env::var("TRACK_ACCESS_SECRET").unwrap_or_default();
         let delay_in_msec = 10;
         let sample_count = 1000;
         let default_tracks = vec![
@@ -57,7 +57,7 @@ impl Config {
             tracks,
         }
     }
-    fn usage(progname: &String) {
+    fn usage(progname: &str) {
         let description = r#"
 
 A real-time Twitter trend tracker in Rust.
